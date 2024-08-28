@@ -1,4 +1,5 @@
 xml.instruct! :xml, version: "1.0"
+xml.instruct! "xml-stylesheet", type: "text/xsl", href: asset_path("podcast.xsl")
 xml.rss version: "2.0",
         "xmlns:itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd",
         "xmlns:content": "http://purl.org/rss/1.0/modules/content/" do
@@ -17,13 +18,13 @@ xml.rss version: "2.0",
     @podcast.episodes.each do |episode|
       xml.item do
         xml.itunes :episode_type, "full"
-        xml.itunes :title, episode.title
+        xml.itunes :title, episode.name
         xml.description episode.description
         xml.enclosure length: episode.file_size,
                       type: "audio/mpeg",
-                      url: epsiode.file_url
-        xml.guid episode.production_number
-        xml.pubDate episode.published_at.to_s(:rfc822)
+                      url: episode.file_url
+        xml.guid episode.guid
+        xml.pubDate episode.published_at.rfc822
         xml.itunes :duration, episode.duration
         xml.itunes :explicit, episode.explicit
       end

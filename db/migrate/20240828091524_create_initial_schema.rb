@@ -11,7 +11,14 @@ class CreateInitialSchema < ActiveRecord::Migration[7.2]
 
     create_table :episodes do |t|
       t.references :podcast, null: false, foreign_key: true
+      t.string :guid, null: false
       t.string :name, null: false
+      t.string :description, null: false
+      t.integer :file_size, null: false
+      t.string :file_url, null: false
+      t.datetime :published_at
+      t.integer :duration
+      t.boolean :explicit
       t.timestamps
     end
   end

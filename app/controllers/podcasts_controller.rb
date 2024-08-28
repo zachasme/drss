@@ -9,12 +9,14 @@ class PodcastsController < ApplicationController
       podcast.explicit = item["explicitContent"]
       podcast.category = item["categories"].first
       podcast.save
+      puts item["id"]
     end
     @podcasts = Podcast.all
   end
 
   def show
     @podcast = Podcast.find(params[:id])
+    Podcast::EpisodeRefresher.new(@podcast).refresh
   end
 
   ORIGIN = "https://api.dr.dk"
