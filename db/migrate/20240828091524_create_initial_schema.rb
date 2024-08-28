@@ -6,6 +6,7 @@ class CreateInitialSchema < ActiveRecord::Migration[7.2]
       t.string :description, null: false
       t.boolean :explicit, null: false
       t.string :category, null: false
+      t.string :image_url, null: false
       t.timestamps
     end
 

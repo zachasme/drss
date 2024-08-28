@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_28_103237) do
     t.string "description", null: false
     t.boolean "explicit", null: false
     t.string "category", null: false
+    t.string "image_url", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
