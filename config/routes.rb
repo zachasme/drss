@@ -12,5 +12,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "podcasts#index"
 
-  resources :podcasts
+  resources :podcasts do
+    scope module: "podcasts" do
+      resources :refreshes
+    end
+  end
+  resources :pulls, only: :create
 end

@@ -1,3 +1,5 @@
+require "net/http"
+
 class Podcast::EpisodeRefresher
   attr_reader :podcast
 
@@ -7,18 +9,18 @@ class Podcast::EpisodeRefresher
 
   def refresh
     auto_paging_each do |item|
+      audio = best_audio item["audioAssets"]
+
       episode = podcast.episodes.find_or_initialize_by(guid: item["productionNumber"])
       episode.name = item["title"]
       episode.description = item["description"]
-      episode.file_size = 0
-      episode.file_url = ""
+      episode.file_size = audio["fileSize"]
+      episode.file_url = audio["url"]
       episode.published_at = item["publishTime"]
       episode.duration = item["duration"]
       episode.explicit = item["explicitContent"]
 
       episode.save
-      puts "@@@"
-      puts episode
     end
   end
 
@@ -36,7 +38,13 @@ class Podcast::EpisodeRefresher
 
         items.each(&blk)
         break if url.nil?
-        break # break on first page for now
       end
+    end
+
+
+    def best_audio(assets)
+      assets.find do |asset|
+        asset["format"] === "mp3" && asset["bitrate"] === 192
+      end || assets.first
     end
 end

@@ -1,5 +1,23 @@
-<ul>
-<% @podcasts.each do |podcast| %>
-  <li><%= link_to podcast.name, podcast_path(podcast, format: :xml) %></li>
-<% end %>
-</ul>
+<main>
+  <input autoFocus type="search" placeholder="De lovl…" />
+  <ol class="podcasts">
+    <% @podcasts.each do |podcast| %>
+      <li>
+        <%= link_to podcast_path(podcast, format: :xml) do %>
+          <%= image_tag podcast.image_url, width: 720, height: 720 %>
+          <div>
+            <h2><%= podcast.name %></h2>
+            <p><%= podcast.punchline %></p>
+          </div>
+        <% end %>
+        <%= form_with url: podcast_refreshes_path(podcast) do |form| %>
+          <%= form.submit "Update" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ol>
+
+  <%= form_with url: pulls_path do |form| %>
+    <%= form.submit "Update" %>
+  <% end %>
+</main>

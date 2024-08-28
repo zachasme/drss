@@ -1,1 +1,52 @@
 /* Application styles */
+
+:root {
+  font-family: system-ui;
+  font-size: calc(1rem + 0.5vw);
+}
+
+main {
+  max-width: 60ch;
+  margin-inline: auto;
+}
+
+input {
+  font-size: inherit;
+  width: 100%;
+  margin-block: 2rem;
+}
+
+svg {
+  height: 1em;
+}
+
+.podcasts {
+  a {
+    display: flex;
+    text-decoration: none;
+    color: inherit;
+  }
+  li + li {
+    margin-top: 2rem;
+  }
+  img {
+    height: 100px;
+    width: 100px;
+    margin-right: 1rem;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+figure, h2, p, ol, li {
+  list-style: none;
+  margin: 0;
+  padding:0 ;
+}
+
+h2 {
+  font-size: inherit;
+}
