@@ -1,20 +1,13 @@
 <main>
+  <h1>DR Podcast Spejl</h1>
+
+  <p>Danmarks Radio har valgt begrænse adgangen til deres podcasts fra tredje-parts apps.</p>
+
+  <p>Denne service udstiller de serier der er tilgængelige på DR lyd som et RSS feed.</p>
+
   <input autoFocus type="search" placeholder="De lovl…" />
   <ol class="podcasts">
-    <% @podcasts.each do |podcast| %>
-      <li>
-        <%= link_to podcast_path(podcast, format: :xml) do %>
-          <%= image_tag podcast.image_url, width: 720, height: 720 %>
-          <div>
-            <h2><%= podcast.name %></h2>
-            <p><%= podcast.punchline %></p>
-          </div>
-        <% end %>
-        <%= form_with url: podcast_refreshes_path(podcast) do |form| %>
-          <%= form.submit "Update" %>
-        <% end %>
-      </li>
-    <% end %>
+    <%= render @podcasts %>
   </ol>
 
   <%= form_with url: pulls_path do |form| %>
