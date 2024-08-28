@@ -1,0 +1,5 @@
+<ul>
+<% @podcasts.each do |podcast| %>
+  <li><%= link_to podcast.name, podcast_path(podcast, format: :xml) %></li>
+<% end %>
+</ul>
